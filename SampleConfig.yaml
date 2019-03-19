@@ -1,0 +1,28 @@
+nodes:
+  - name: Node1
+    args:
+      arg1:
+      - name: {{param1|default('localhost')}}  # <-- Using localhost if sut_host is undefined
+        values: [{{param2}}]
+
+      arg2:
+      - name: {{param3}}
+        {% if param4 is defined %}
+        values: [{{param5}}]
+        {% endif %}
+
+  - name: Auto
+    args:
+      coins:
+      {% if param4 is defined %}
+      - yyy: [foo->bar, foo->bar]
+      {% else %}
+      - aaa: [foo->bar, foo->bar]
+      {% endif %}
+
+  - name: Node2
+    args:
+      arg1: yy->aa
+      arg2: bb->ee
+
+  - name: Node3
